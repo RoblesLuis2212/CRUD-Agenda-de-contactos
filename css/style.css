@@ -6,3 +6,7 @@ body{
 main{
     flex-grow: 1;
 }
+.imgPortada{
+    width: 100px;
+    border-radius: 50%;
+}
