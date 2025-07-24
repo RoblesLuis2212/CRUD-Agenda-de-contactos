@@ -204,19 +204,17 @@
             ></button>
           </div>
           <div class="modal-body">
-            <form>
+            <form id="formContacto">
               <div class="row">
                 <div class="col-md-6">
                   <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label"
-                      >Nombre</label
-                    >
+                    <label for="nombre" class="form-label">Nombre</label>
                     <input
                       type="text"
                       class="form-control"
-                      id="exampleFormControlInput1"
+                      id="nombre"
                       placeholder="Ej: Juan Ignacio"
-                      minlength="15"
+                      minlength="5"
                       maxlength="60"
                       required
                     />
@@ -224,31 +222,27 @@
                 </div>
                 <div class="col-md-6">
                   <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label"
-                      >Apellido</label
-                    >
+                    <label for="apellido" class="form-label">Apellido</label>
                     <input
                       type="text"
                       class="form-control"
-                      id="exampleFormControlInput1"
+                      id="apellido"
                       placeholder="Ej: Perez"
                       required
-                      minlength="15"
+                      minlength="5"
                       maxlength="60"
                     />
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label"
-                      >Telefono</label
-                    >
+                    <label for="telefono" class="form-label">Telefono</label>
                     <input
                       type="text"
                       class="form-control"
-                      id="exampleFormControlInput1"
+                      id="telefono"
                       placeholder="Ej: 038601015"
-                      minlength="10"
+                      minlength="5"
                       maxlength="15"
                       required
                     />
@@ -256,13 +250,11 @@
                 </div>
                 <div class="col-md-6">
                   <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label"
-                      >Email</label
-                    >
+                    <label for="email" class="form-label">Email</label>
                     <input
                       type="email"
                       class="form-control"
-                      id="exampleFormControlInput1"
+                      id="telefono"
                       placeholder="Ej: Juanperez@gmail.com"
                       minlength="7"
                       maxlength="30"
@@ -270,26 +262,24 @@
                   </div>
                 </div>
                 <div class="mb-3">
-                  <label for="exampleFormControlInput1" class="form-label"
+                  <label for="imagen" class="form-label"
                     >URL de la Foto (Opcional)</label
                   >
                   <input
                     type="text"
                     class="form-control"
-                    id="exampleFormControlInput1"
+                    id="imagen"
                     placeholder="Ej: https://example.com/image.jpg"
                     maxlength="100"
                   />
                 </div>
                 <div class="col-md-6">
                   <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label"
-                      >Empresa</label
-                    >
+                    <label for="empresa" class="form-label">Empresa</label>
                     <input
                       type="text"
                       class="form-control"
-                      id="exampleFormControlInput1"
+                      id="empresa"
                       placeholder="Ej: Rolling Code"
                       required
                       minlength="7"
@@ -299,52 +289,48 @@
                 </div>
                 <div class="col-md-6">
                   <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label"
+                    <label for="puestoTrabajo" class="form-label"
                       >Puesto de Trabajo</label
                     >
                     <input
                       type="text"
                       class="form-control"
-                      id="exampleFormControlInput1"
+                      id="puestoTrabajo"
                       placeholder="Ej: Atencion al Cliente"
                       required
-                      minlength="10"
+                      minlength="5"
                       maxlength="30"
                     />
                   </div>
                 </div>
                 <div class="mb-3">
-                  <label for="exampleFormControlInput1" class="form-label"
-                    >Direccion</label
-                  >
+                  <label for="direccion" class="form-label">Direccion</label>
                   <input
                     type="text"
                     class="form-control"
-                    id="exampleFormControlInput1"
+                    id="direccion"
                     placeholder="Ej: Las Piedras 220"
                     required
-                    minlength="10"
+                    minlength="5"
                     maxlength="50"
                   />
                 </div>
                 <div class="mb-3">
-                  <label for="exampleFormControlTextarea1" class="form-label"
-                    >Notas</label
-                  >
+                  <label for="notas" class="form-label">Notas</label>
                   <textarea
                     class="form-control"
-                    id="exampleFormControlTextarea1"
+                    id="notas"
                     placeholder="Dejar algun dato particular"
                     rows="3"
                   ></textarea>
                 </div>
               </div>
+              <div class="modal-footer justify-content-start">
+                <button type="submit" class="btn btn-primary">
+                  Guardar Contacto
+                </button>
+              </div>
             </form>
-          </div>
-          <div class="modal-footer justify-content-start">
-            <button type="submit" class="btn btn-primary">
-              Guardar Contacto
-            </button>
           </div>
         </div>
       </div>
@@ -354,6 +340,6 @@
       integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
       crossorigin="anonymous"
     ></script>
-    <script src="../js/app.js"></script>
+    <script src="../js/app.js" type="module"></script>
   </body>
 </html>
