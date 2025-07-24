@@ -10,3 +10,11 @@ main{
     width: 80px;
     border-radius: 50%;
 }
+.imgAgenda{
+    width: 100px;
+    border-radius: 15px;
+}
+.imgInformacion{
+    width: 100px;
+    border-radius: 40%;
+}
