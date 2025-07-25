@@ -15,11 +15,34 @@ const puestoTrabajo = document.getElementById("puestoTrabajo");
 const inputDireccion = document.getElementById("direccion");
 const inputNotas = document.getElementById("notas");
 
+const Agenda = [];
+
 //Funciones
 const crearContacto = () => {
   console.log("Aqui tengo que crear el contacto");
   //Todo agregar validaciones
   //Buscar los datos del formulario y crear objeto contacto
+  const contactoNuevo = new Contacto(
+    inputNombre.value,
+    inputApellido.value,
+    inputTelefono.value,
+    inputEmail.value,
+    inputImagen.value,
+    inputEmpresa.value,
+    puestoTrabajo.value,
+    inputDireccion.value,
+    inputNotas.value
+  );
+  formularioContacto.reset();
+  //Guardar los datos en la agenda de contactos
+  Agenda.push(contactoNuevo);
+  console.log(contactoNuevo);
+  //Guardar contacto en el local storange
+  guardarLocalStorage();
+};
+
+const guardarLocalStorage = () => {
+  localStorage.setItem("agendaKey", JSON.stringify(Agenda));
 };
 
 //Manejadores de eventos
