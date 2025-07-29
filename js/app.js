@@ -15,7 +15,8 @@ const puestoTrabajo = document.getElementById("puestoTrabajo");
 const inputDireccion = document.getElementById("direccion");
 const inputNotas = document.getElementById("notas");
 
-const Agenda = [];
+//Recuperamos los datos del local storage
+const Agenda = JSON.parse(localStorage.getItem("agendaKey")) || [];
 
 //Funciones
 const crearContacto = () => {
@@ -39,8 +40,15 @@ const crearContacto = () => {
   console.log(contactoNuevo);
   //Guardar contacto en el local storange
   guardarLocalStorage();
+  //Mostrar un mensaje al usuario
+
+  //Limpiar el formulario
+  limpiarFormulario();
 };
 
+const limpiarFormulario = () => {
+  formularioContacto.reset();
+};
 const guardarLocalStorage = () => {
   localStorage.setItem("agendaKey", JSON.stringify(Agenda));
 };
