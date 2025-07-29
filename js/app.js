@@ -41,7 +41,11 @@ const crearContacto = () => {
   //Guardar contacto en el local storange
   guardarLocalStorage();
   //Mostrar un mensaje al usuario
-
+  Swal.fire({
+    title: "Contacto guardado correctamente",
+    icon: "success",
+    draggable: true,
+  });
   //Limpiar el formulario
   limpiarFormulario();
 };
