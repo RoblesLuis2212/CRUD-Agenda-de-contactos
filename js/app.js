@@ -14,6 +14,7 @@ const inputEmpresa = document.getElementById("empresa");
 const puestoTrabajo = document.getElementById("puestoTrabajo");
 const inputDireccion = document.getElementById("direccion");
 const inputNotas = document.getElementById("notas");
+const tbody = document.getElementById("tablacontactosBody");
 
 //Recuperamos los datos del local storage
 const Agenda = JSON.parse(localStorage.getItem("agendaKey")) || [];
@@ -48,6 +49,8 @@ const crearContacto = () => {
   });
   //Limpiar el formulario
   limpiarFormulario();
+
+  dibujarFila(contactoNuevo, Agenda.length);
 };
 
 const limpiarFormulario = () => {
@@ -55,6 +58,49 @@ const limpiarFormulario = () => {
 };
 const guardarLocalStorage = () => {
   localStorage.setItem("agendaKey", JSON.stringify(Agenda));
+};
+
+const cargarContactos = () => {
+  //Verificar si tengo contactos para cargar
+  if (Agenda.length !== 0) {
+    //Recorrer mi agenda y por cada elemento de la agenda
+    //Si tengo debo dibujar filas en la tabla
+    Agenda.map((contacto, indice) => dibujarFila(contacto, indice + 1));
+  } else {
+    console.log("no hay elementos en la agenda");
+    //Agregar un parrafo que diga que no tenemos contactos
+  }
+};
+
+const dibujarFila = (itemContacto, fila) => {
+  console.log(itemContacto.imagen);
+  tbody.innerHTML += `
+  <tr>
+                <th scope="row">${fila}</th>
+                <td>${itemContacto.nombre}</td>
+                <td>${itemContacto.apellido}</td>
+                <td>${itemContacto.telefono}</td>
+                <td>${itemContacto.email}</td>
+                <td>
+                  <img
+                    src=${itemContacto.imagen}
+                    alt=${itemContacto.nombre}
+                    class="imgAgenda"
+                  />
+                </td>
+                <td>
+                  <button class="btn btn-primary">
+                    <i class="bi bi-eye-fill"></i>
+                  </button>
+                  <button class="btn btn-warning">
+                    <i class="bi bi-pencil-fill"></i>
+                  </button>
+                  <button class="btn btn-danger">
+                    <i class="bi bi-trash3-fill"></i>
+                  </button>
+                </td>
+              </tr>
+  `;
 };
 
 //Manejadores de eventos
@@ -67,3 +113,5 @@ formularioContacto.addEventListener("submit", (e) => {
   //Aqui tengo que crear/editar contacto
   crearContacto();
 });
+
+cargarContactos();
