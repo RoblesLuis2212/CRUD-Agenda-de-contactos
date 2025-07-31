@@ -116,14 +116,26 @@ window.borrarContacto = (id) => {
     cancelButtonText: "Cancelar",
   }).then((result) => {
     if (result.isConfirmed) {
-      Swal.fire({
-        title: "Deleted!",
+      //Aqui se agrega la logica para borrar
+      //Buscar en que posicion esta el elemento
+      const indiceContacto = Agenda.findIndex((contacto) => contacto.id === id);
+      //Borrar el elemento con splice
+      Agenda.splice(indiceContacto, 1);
+      //Actualizar local storage
+      guardarLocalStorage();
+      //Actualizar la tabla
+      tbody.children[indiceContacto].remove();
+      //Actualizar los elementos del array
 
-        text: "Your file has been deleted.",
+      Swal.fire({
+        title: "Contacto Eliminado",
+
+        text: "El contacto fue eliminado corractamente.",
 
         icon: "success",
       });
     }
+    console.log(Agenda);
   });
 };
 //Manejadores de eventos
