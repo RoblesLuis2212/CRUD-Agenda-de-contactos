@@ -21,7 +21,6 @@ const Agenda = JSON.parse(localStorage.getItem("agendaKey")) || [];
 
 //Funciones
 const crearContacto = () => {
-  console.log("Aqui tengo que crear el contacto");
   //Todo agregar validaciones
   //Buscar los datos del formulario y crear objeto contacto
   const contactoNuevo = new Contacto(
@@ -38,7 +37,6 @@ const crearContacto = () => {
   formularioContacto.reset();
   //Guardar los datos en la agenda de contactos
   Agenda.push(contactoNuevo);
-  console.log(contactoNuevo);
   //Guardar contacto en el local storange
   guardarLocalStorage();
   //Mostrar un mensaje al usuario
@@ -73,7 +71,6 @@ const cargarContactos = () => {
 };
 
 const dibujarFila = (itemContacto, fila) => {
-  console.log(itemContacto.imagen);
   tbody.innerHTML += `
   <tr>
                 <th scope="row">${fila}</th>
@@ -95,7 +92,10 @@ const dibujarFila = (itemContacto, fila) => {
                   <button class="btn btn-warning">
                     <i class="bi bi-pencil-fill"></i>
                   </button>
-                  <button class="btn btn-danger">
+                  <button class="btn btn-danger"
+                  type="button"
+                  onclick="borrarContacto('${itemContacto.id}')"
+                  >
                     <i class="bi bi-trash3-fill"></i>
                   </button>
                 </td>
@@ -103,6 +103,29 @@ const dibujarFila = (itemContacto, fila) => {
   `;
 };
 
+window.borrarContacto = (id) => {
+  //Mensaje para que el usuario confirme si quiere borrar el contacto
+  Swal.fire({
+    title: "¿Estas seguro de eliminar el contacto?",
+    text: "Esta accion no se puede revertir!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Eliminar",
+    cancelButtonText: "Cancelar",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire({
+        title: "Deleted!",
+
+        text: "Your file has been deleted.",
+
+        icon: "success",
+      });
+    }
+  });
+};
 //Manejadores de eventos
 btnAgregarContacto.addEventListener("click", () => {
   modalFormularioContacto.show();
