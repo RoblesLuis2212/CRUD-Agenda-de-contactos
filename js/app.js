@@ -89,7 +89,8 @@ const dibujarFila = (itemContacto, fila) => {
                   <button class="btn btn-primary">
                     <i class="bi bi-eye-fill"></i>
                   </button>
-                  <button class="btn btn-warning">
+                  <button class="btn btn-warning"
+                  onclick="prepararContacto('${itemContacto.id}')">
                     <i class="bi bi-pencil-fill"></i>
                   </button>
                   <button class="btn btn-danger"
@@ -129,14 +130,31 @@ window.borrarContacto = (id) => {
 
       Swal.fire({
         title: "Contacto Eliminado",
-
         text: "El contacto fue eliminado corractamente.",
-
         icon: "success",
       });
     }
     console.log(Agenda);
   });
+};
+
+window.prepararContacto = (id) => {
+  //Modificar el titulo del formulario
+  //Cargar inputs con datos del contacto para que lo vea al usuario
+  const contactoBuscado = Agenda.find((contacto) => contacto.id === id);
+  console.log(contactoBuscado);
+  //Mostrar los datos del contacto en el form
+  inputNombre.value = contactoBuscado.nombre;
+  inputApellido.value = contactoBuscado.apellido;
+  inputTelefono.value = contactoBuscado.telefono;
+  inputEmail.value = contactoBuscado.email;
+  inputImagen.value = contactoBuscado.imagen;
+  inputEmpresa.value = contactoBuscado.empresa;
+  puestoTrabajo.value = contactoBuscado.puestoTrabajo;
+  inputDireccion.value = contactoBuscado.direccion;
+
+  //Abrir el modal
+  modalFormularioContacto.show();
 };
 //Manejadores de eventos
 btnAgregarContacto.addEventListener("click", () => {
