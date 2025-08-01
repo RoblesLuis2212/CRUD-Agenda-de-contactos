@@ -15,6 +15,7 @@ const puestoTrabajo = document.getElementById("puestoTrabajo");
 const inputDireccion = document.getElementById("direccion");
 const inputNotas = document.getElementById("notas");
 const tbody = document.getElementById("tablacontactosBody");
+let estoyCreando = true;
 
 //Recuperamos los datos del local storage
 const Agenda = JSON.parse(localStorage.getItem("agendaKey")) || [];
@@ -152,19 +153,25 @@ window.prepararContacto = (id) => {
   inputEmpresa.value = contactoBuscado.empresa;
   puestoTrabajo.value = contactoBuscado.puestoTrabajo;
   inputDireccion.value = contactoBuscado.direccion;
-
   //Abrir el modal
   modalFormularioContacto.show();
 };
+const editarContacto = () => {};
 //Manejadores de eventos
 btnAgregarContacto.addEventListener("click", () => {
+  limpiarFormulario();
+  estoyCreando = true;
   modalFormularioContacto.show();
 });
 
 formularioContacto.addEventListener("submit", (e) => {
   e.preventDefault();
   //Aqui tengo que crear/editar contacto
-  crearContacto();
+  if (estoyCreando) {
+    crearContacto();
+  } else {
+    editarContacto();
+  }
 });
 
 cargarContactos();
