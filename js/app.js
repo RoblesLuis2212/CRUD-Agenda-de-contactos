@@ -16,6 +16,7 @@ const inputDireccion = document.getElementById("direccion");
 const inputNotas = document.getElementById("notas");
 const tbody = document.getElementById("tablacontactosBody");
 let estoyCreando = true;
+let idContacto = null;
 
 //Recuperamos los datos del local storage
 const Agenda = JSON.parse(localStorage.getItem("agendaKey")) || [];
@@ -153,10 +154,31 @@ window.prepararContacto = (id) => {
   inputEmpresa.value = contactoBuscado.empresa;
   puestoTrabajo.value = contactoBuscado.puestoTrabajo;
   inputDireccion.value = contactoBuscado.direccion;
+  idContacto = id;
   //Abrir el modal
   modalFormularioContacto.show();
 };
-const editarContacto = () => {};
+const editarContacto = () => {
+  //Buscar en que posicion del array esta el contacto con tal ID
+  const indiceContacto = Agenda.findIndex((contacto) => contacto.id === id);
+  //Modificar el contacto
+  Agenda[indiceContacto].nombre = inputNombre.value;
+  Agenda[indiceContacto].apellido = inputApellido.value;
+  Agenda[indiceContacto].telefono = inputTelefono.value;
+  Agenda[indiceContacto].email = inputEmail.value;
+  Agenda[indiceContacto].imagen = inputImagen.value;
+  Agenda[indiceContacto].empresa = inputEmpresa.value;
+  Agenda[indiceContacto].puestoTrabajo = puestoTrabajo.value;
+  Agenda[indiceContacto].direccion = inputDireccion.value;
+
+  //Actualizar local storage
+  guardarLocalStorage();
+  //Actualizar fila de la tabla
+  //Cerrar ventana modal
+  modalFormularioContacto.hide();
+
+  //Mostrar una ventana de sweet alert para indicar que el contacto fue editado correctamente
+};
 //Manejadores de eventos
 btnAgregarContacto.addEventListener("click", () => {
   limpiarFormulario();
