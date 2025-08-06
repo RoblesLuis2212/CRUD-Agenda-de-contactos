@@ -1,4 +1,5 @@
 import Contacto from "./Contacto.js";
+import { validarCantidadCaracteres } from "./Validaciones.js";
 //Elementos del DOM
 const btnAgregarContacto = document.getElementById("btnAgregarContacto");
 const modalFormularioContacto = new bootstrap.Modal(
@@ -25,32 +26,36 @@ const Agenda = JSON.parse(localStorage.getItem("agendaKey")) || [];
 const crearContacto = () => {
   //Todo agregar validaciones
   //Buscar los datos del formulario y crear objeto contacto
-  const contactoNuevo = new Contacto(
-    inputNombre.value,
-    inputApellido.value,
-    inputTelefono.value,
-    inputEmail.value,
-    inputImagen.value,
-    inputEmpresa.value,
-    puestoTrabajo.value,
-    inputDireccion.value,
-    inputNotas.value
-  );
-  formularioContacto.reset();
-  //Guardar los datos en la agenda de contactos
-  Agenda.push(contactoNuevo);
-  //Guardar contacto en el local storange
-  guardarLocalStorage();
-  //Mostrar un mensaje al usuario
-  Swal.fire({
-    title: "Contacto guardado correctamente",
-    icon: "success",
-    draggable: true,
-  });
-  //Limpiar el formulario
-  limpiarFormulario();
+  if (validacion(inputNombre, 2, 50)) {
+    const contactoNuevo = new Contacto(
+      inputNombre.value,
+      inputApellido.value,
+      inputTelefono.value,
+      inputEmail.value,
+      inputImagen.value,
+      inputEmpresa.value,
+      puestoTrabajo.value,
+      inputDireccion.value,
+      inputNotas.value
+    );
+    formularioContacto.reset();
+    //Guardar los datos en la agenda de contactos
+    Agenda.push(contactoNuevo);
+    //Guardar contacto en el local storange
+    guardarLocalStorage();
+    //Mostrar un mensaje al usuario
+    Swal.fire({
+      title: "Contacto guardado correctamente",
+      icon: "success",
+      draggable: true,
+    });
+    //Limpiar el formulario
+    limpiarFormulario();
 
-  dibujarFila(contactoNuevo, Agenda.length);
+    dibujarFila(contactoNuevo, Agenda.length);
+  } else {
+    console.log("Error en la validacion");
+  }
 };
 
 const limpiarFormulario = () => {
@@ -179,6 +184,15 @@ const editarContacto = () => {
 
   //Mostrar una ventana de sweet alert para indicar que el contacto fue editado correctamente
 };
+
+const validacion = (input) => {
+  let datosValidos = true;
+  if (!validarCantidadCaracteres(input, 2, 50)) {
+    datosValidos = false;
+  }
+  return datosValidos;
+};
+
 //Manejadores de eventos
 btnAgregarContacto.addEventListener("click", () => {
   limpiarFormulario();
