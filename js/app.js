@@ -1,5 +1,5 @@
 import Contacto from "./Contacto.js";
-import { validarCantidadCaracteres } from "./Validaciones.js";
+import { validarCantidadCaracteres, validarEmail } from "./Validaciones.js";
 //Elementos del DOM
 const btnAgregarContacto = document.getElementById("btnAgregarContacto");
 const modalFormularioContacto = new bootstrap.Modal(
@@ -127,6 +127,7 @@ window.borrarContacto = (id) => {
       //Aqui se agrega la logica para borrar
       //Buscar en que posicion esta el elemento
       const indiceContacto = Agenda.findIndex((contacto) => contacto.id === id);
+      console.log(indiceContacto);
       //Borrar el elemento con splice
       Agenda.splice(indiceContacto, 1);
       //Actualizar local storage
@@ -141,7 +142,7 @@ window.borrarContacto = (id) => {
         icon: "success",
       });
     }
-    console.log(Agenda);
+    // console.log(tareas);
   });
 };
 
@@ -185,11 +186,15 @@ const editarContacto = () => {
   //Mostrar una ventana de sweet alert para indicar que el contacto fue editado correctamente
 };
 
-const validacion = (input) => {
+const validacion = () => {
   let datosValidos = true;
-  if (!validarCantidadCaracteres(input, 2, 50)) {
+  if (!validarCantidadCaracteres(inputNombre, 2, 50)) {
     datosValidos = false;
   }
+  if (!validarEmail()) {
+    datosValidos = false;
+  }
+  //To-do agregar el resto de las funciones de validacion
   return datosValidos;
 };
 
