@@ -224,6 +224,15 @@ const validacion = () => {
   if (!validacionTelefono(inputTelefono)) {
     datosValidos = false;
   }
+  if (!validarCantidadCaracteres(inputEmpresa, 2, 50)) {
+    datosValidos = false;
+  }
+  if (!validarCantidadCaracteres(puestoTrabajo, 2, 30)) {
+    datosValidos = false;
+  }
+  if (!validarCantidadCaracteres(inputDireccion, 2, 50)) {
+    datosValidos = false;
+  }
   if (!validarEmail(inputEmail)) {
     datosValidos = false;
   }
