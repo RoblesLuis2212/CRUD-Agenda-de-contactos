@@ -22,6 +22,7 @@ const inputNotas = document.getElementById("notas");
 const tbody = document.getElementById("tablacontactosBody");
 let estoyCreando = true;
 let idContacto = null;
+const tituloModal = document.querySelector(".modal-title");
 
 //Recuperamos los datos del local storage
 const Agenda = JSON.parse(localStorage.getItem("agendaKey")) || [];
@@ -159,7 +160,6 @@ window.borrarContacto = (id) => {
 };
 
 window.prepararContacto = (id) => {
-  //Modificar el titulo del formulario
   //Cargar inputs con datos del contacto para que lo vea al usuario
   const contactoBuscado = Agenda.find((contacto) => contacto.id === id);
   console.log(contactoBuscado);
@@ -172,13 +172,19 @@ window.prepararContacto = (id) => {
   inputEmpresa.value = contactoBuscado.empresa;
   puestoTrabajo.value = contactoBuscado.puestoTrabajo;
   inputDireccion.value = contactoBuscado.direccion;
+  //Modificar el titulo del formulario
+  estoyCreando = false;
+  tituloModal.textContent = "Editar Contacto";
   idContacto = id;
   //Abrir el modal
   modalFormularioContacto.show();
 };
 const editarContacto = () => {
   //Buscar en que posicion del array esta el contacto con tal ID
-  const indiceContacto = Agenda.findIndex((contacto) => contacto.id === id);
+  const indiceContacto = Agenda.findIndex(
+    (contacto) => contacto.id === idContacto
+  );
+  console.log(indiceContacto);
   //Modificar el contacto
   Agenda[indiceContacto].nombre = inputNombre.value;
   Agenda[indiceContacto].apellido = inputApellido.value;
@@ -192,6 +198,7 @@ const editarContacto = () => {
   //Actualizar local storage
   guardarLocalStorage();
   //Actualizar fila de la tabla
+  dibujarFila();
   //Cerrar ventana modal
   modalFormularioContacto.hide();
 
@@ -217,6 +224,7 @@ const validacion = () => {
 btnAgregarContacto.addEventListener("click", () => {
   limpiarFormulario();
   estoyCreando = true;
+  tituloModal.textContent = "Agregar Contacto";
   modalFormularioContacto.show();
 });
 
