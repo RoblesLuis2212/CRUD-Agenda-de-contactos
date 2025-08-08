@@ -1,5 +1,9 @@
 import Contacto from "./Contacto.js";
-import { validarCantidadCaracteres, validarEmail } from "./Validaciones.js";
+import {
+  validarCantidadCaracteres,
+  validarEmail,
+  validarURL,
+} from "./Validaciones.js";
 //Elementos del DOM
 const btnAgregarContacto = document.getElementById("btnAgregarContacto");
 const modalFormularioContacto = new bootstrap.Modal(
@@ -53,6 +57,7 @@ const crearContacto = () => {
     limpiarFormulario();
 
     dibujarFila(contactoNuevo, Agenda.length);
+    modalFormularioContacto.hide();
   } else {
     console.log("Error en la validacion");
   }
@@ -72,8 +77,12 @@ const cargarContactos = () => {
     //Si tengo debo dibujar filas en la tabla
     Agenda.map((contacto, indice) => dibujarFila(contacto, indice + 1));
   } else {
-    console.log("no hay elementos en la agenda");
     //Agregar un parrafo que diga que no tenemos contactos
+    const padreTableResponsive = document.querySelector(".table-responsive");
+    const p = document.createElement("p");
+    p.textContent = "No hay contactos en la agenda";
+    p.classList.add("text-center");
+    padreTableResponsive.appendChild(p);
   }
 };
 
@@ -191,7 +200,10 @@ const validacion = () => {
   if (!validarCantidadCaracteres(inputNombre, 2, 50)) {
     datosValidos = false;
   }
-  if (!validarEmail()) {
+  if (!validarEmail(inputEmail)) {
+    datosValidos = false;
+  }
+  if (!validarURL(inputImagen)) {
     datosValidos = false;
   }
   //To-do agregar el resto de las funciones de validacion
