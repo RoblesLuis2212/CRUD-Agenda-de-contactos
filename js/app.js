@@ -86,38 +86,41 @@ const cargarContactos = () => {
   }
 };
 
-const dibujarFila = (itemContacto, fila) => {
-  tbody.innerHTML += `
-  <tr>
-                <th scope="row">${fila}</th>
-                <td>${itemContacto.nombre}</td>
-                <td>${itemContacto.apellido}</td>
-                <td>${itemContacto.telefono}</td>
-                <td>${itemContacto.email}</td>
-                <td>
-                  <img
-                    src=${itemContacto.imagen}
-                    alt=${itemContacto.nombre}
-                    class="imgAgenda"
-                  />
-                </td>
-                <td>
-                  <button class="btn btn-primary">
-                    <i class="bi bi-eye-fill"></i>
-                  </button>
-                  <button class="btn btn-warning"
-                  onclick="prepararContacto('${itemContacto.id}')">
-                    <i class="bi bi-pencil-fill"></i>
-                  </button>
-                  <button class="btn btn-danger"
-                  type="button"
-                  onclick="borrarContacto('${itemContacto.id}')"
-                  >
-                    <i class="bi bi-trash3-fill"></i>
-                  </button>
-                </td>
-              </tr>
-  `;
+const dibujarFila = () => {
+  tbody.innerHTML = "";
+  Agenda.forEach((itemContacto, index) => {
+    tbody.innerHTML += `
+    <tr>
+                  <th scope="row">${index + 1}</th>
+                  <td>${itemContacto.nombre}</td>
+                  <td>${itemContacto.apellido}</td>
+                  <td>${itemContacto.telefono}</td>
+                  <td>${itemContacto.email}</td>
+                  <td>
+                    <img
+                      src=${itemContacto.imagen}
+                      alt=${itemContacto.nombre}
+                      class="imgAgenda"
+                    />
+                  </td>
+                  <td>
+                    <button class="btn btn-primary">
+                      <i class="bi bi-eye-fill"></i>
+                    </button>
+                    <button class="btn btn-warning"
+                    onclick="prepararContacto('${itemContacto.id}')">
+                      <i class="bi bi-pencil-fill"></i>
+                    </button>
+                    <button class="btn btn-danger"
+                    type="button"
+                    onclick="borrarContacto('${itemContacto.id}')"
+                    >
+                      <i class="bi bi-trash3-fill"></i>
+                    </button>
+                  </td>
+                </tr>
+    `;
+  });
 };
 
 window.borrarContacto = (id) => {
@@ -144,7 +147,7 @@ window.borrarContacto = (id) => {
       //Actualizar la tabla
       tbody.children[indiceContacto].remove();
       //Actualizar los elementos del array
-
+      dibujarFila();
       Swal.fire({
         title: "Contacto Eliminado",
         text: "El contacto fue eliminado corractamente.",
