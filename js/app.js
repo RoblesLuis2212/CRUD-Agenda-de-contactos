@@ -1,5 +1,6 @@
 import Contacto from "./Contacto.js";
 import {
+  validacionTelefono,
   validarCantidadCaracteres,
   validarEmail,
   validarURL,
@@ -199,6 +200,12 @@ const editarContacto = () => {
   guardarLocalStorage();
   //Actualizar fila de la tabla
   dibujarFila();
+  //Mensaje para indicar que el contacto fue editado correctamente
+  Swal.fire({
+    title: "El contacto fue editado exitosamente!",
+    icon: "success",
+    draggable: true,
+  });
   //Cerrar ventana modal
   modalFormularioContacto.hide();
 
@@ -206,8 +213,15 @@ const editarContacto = () => {
 };
 
 const validacion = () => {
+  console.log(inputTelefono.value);
   let datosValidos = true;
   if (!validarCantidadCaracteres(inputNombre, 2, 50)) {
+    datosValidos = false;
+  }
+  if (!validarCantidadCaracteres(inputApellido, 2, 50)) {
+    datosValidos = false;
+  }
+  if (!validacionTelefono(inputTelefono)) {
     datosValidos = false;
   }
   if (!validarEmail(inputEmail)) {

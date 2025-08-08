@@ -37,3 +37,17 @@ export const validarURL = (input) => {
   }
   return true;
 };
+
+//Validacion para telefono
+export const validacionTelefono = (telefono) => {
+  const regx = /^\+54\s?9\s?\d{4}[- ]?\d{6}$/;
+  if (regx.test(telefono.value)) {
+    telefono.classList.add("is-valid");
+    telefono.classList.remove("is-invalid");
+    return true;
+  } else {
+    telefono.classList.add("is-invalid");
+    telefono.classList.remove("is-valid");
+    return false;
+  }
+};
