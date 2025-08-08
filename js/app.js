@@ -106,7 +106,9 @@ const dibujarFila = () => {
                     />
                   </td>
                   <td>
-                    <button class="btn btn-primary">
+                    <button class="btn btn-primary"
+                    onclick="mostrarDetalleContacto('${itemContacto.id}')"
+                    >
                       <i class="bi bi-eye-fill"></i>
                     </button>
                     <button class="btn btn-warning"
@@ -208,8 +210,74 @@ const editarContacto = () => {
   });
   //Cerrar ventana modal
   modalFormularioContacto.hide();
+};
 
-  //Mostrar una ventana de sweet alert para indicar que el contacto fue editado correctamente
+window.mostrarDetalleContacto = (id) => {
+  const indiceContacto = Agenda.find((contacto) => contacto.id === id);
+  const sectionOculta = document.getElementById("detalleContacto");
+  sectionOculta.innerHTML = "";
+  sectionOculta.classList.remove("d-none");
+  sectionOculta.innerHTML += `
+  <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Contactos</a></li>
+            <li class="breadcrumb-item active" aria-current="page">${indiceContacto.nombre}</li>
+          </ol>
+        </nav>
+        <div class="row">
+          <div class="col-12 col-md-12">
+            <div class="card">
+              <div class="card-body">
+                <div class="d-flex align-items-center mb-3">
+                  <img
+                    src="${indiceContacto.imagen}"
+                    class="card-img-top rounded-circle imgInformacion"
+                    alt="Persona"
+                  />
+                  <div class="flex-grow-1">
+                    <h3 class="card-title mb-0 ms-3">${indiceContacto.nombre}</h3>
+                    <p class="card-text ms-3 text-break">
+                      ${indiceContacto.email}
+                    </p>
+                  </div>
+                  <a href="#" class="btn btn-success ms-auto">
+                    <i class="bi bi-whatsapp"></i>
+                  </a>
+                </div>
+              </div>
+              <h5 class="ms-3">Informacion del Contacto</h5>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item bg-dark text-white ms-2">
+                  <i class="bi bi-telephone me-1"></i>Telefono: ${indiceContacto.telefono}
+                </li>
+                <li class="list-group-item bg-dark text-white ms-2">
+                  <i class="bi bi-envelope me-1"></i>Email:
+                  ${indiceContacto.email}
+                </li>
+                <li class="list-group-item bg-dark text-white ms-2">
+                  <i class="bi bi-building me-1"></i>Empresa: ${indiceContacto.empresa}
+                </li>
+                <li class="list-group-item bg-dark text-white ms-2">
+                  <i class="bi bi-person-fill me-1"></i>Puesto de Trabajo:
+                  ${indiceContacto.puestoTrabajo}
+                </li>
+                <li class="list-group-item bg-dark text-white ms-2">
+                  <i class="bi bi-map me-1"></i>
+                  Direccion: ${indiceContacto.direccion}
+                </li>
+              </ul>
+              <div class="mt-3 ms-3">
+                <h6>Notas</h6>
+                <p>
+                ${indiceContacto.notas}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a href="../index.html" class="btn btn-secondary ms-2 mt-4"
+          ><i class="bi bi-arrow-left me-1"></i>Volver a la lista</a
+        >`;
 };
 
 const validacion = () => {
