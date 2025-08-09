@@ -24,6 +24,7 @@ const tbody = document.getElementById("tablacontactosBody");
 let estoyCreando = true;
 let idContacto = null;
 const tituloModal = document.querySelector(".modal-title");
+const sectionOculta = document.getElementById("detalleContacto");
 
 //Recuperamos los datos del local storage
 const Agenda = JSON.parse(localStorage.getItem("agendaKey")) || [];
@@ -214,7 +215,6 @@ const editarContacto = () => {
 
 window.mostrarDetalleContacto = (id) => {
   const indiceContacto = Agenda.find((contacto) => contacto.id === id);
-  const sectionOculta = document.getElementById("detalleContacto");
   sectionOculta.innerHTML = "";
   sectionOculta.classList.remove("d-none");
   sectionOculta.innerHTML += `
@@ -275,11 +275,15 @@ window.mostrarDetalleContacto = (id) => {
             </div>
           </div>
         </div>
-        <a href="../index.html" class="btn btn-secondary ms-2 mt-4"
-          ><i class="bi bi-arrow-left me-1"></i>Volver a la lista</a
+        <button class="btn btn-secondary ms-2 mt-4"
+        onclick="ocultarDetalle()"
+          ><i class="bi bi-arrow-left me-1"></i>Volver a la lista</button
         >`;
 };
 
+window.ocultarDetalle = () => {
+  sectionOculta.classList.add("d-none");
+};
 const validacion = () => {
   console.log(inputTelefono.value);
   let datosValidos = true;
