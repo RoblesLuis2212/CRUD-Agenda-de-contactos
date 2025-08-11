@@ -283,6 +283,12 @@ window.mostrarDetalleContacto = (id) => {
 
 window.ocultarDetalle = () => {
   sectionOculta.classList.add("d-none");
+
+  //Metodo para volver a la lista
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
 };
 const validacion = () => {
   console.log(inputTelefono.value);
